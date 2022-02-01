@@ -5,31 +5,49 @@ import {RootState} from "../../store/reducer";
 import {List} from "@mui/material";
 import ListItem from "./ListItem";
 import {Hotel} from "../../models/Hotel";
+import styled from "styled-components";
 
 export const HotelList: any = () => {
     const { hotelList } = useSelector((state: RootState)=> state);
-    console.log('hotelList from component', hotelList);
     const dispatch = useDispatch();
     useEffect(()=> {
-        console.log('get hotels list');
-        dispatch(actionCreator.getHotelList());
+        console.log('fetch hotels list');
+        fetch('https://obmng.dbm.guestline.net/api/hotels?collection-id=OBMNG')
+            .then(response => response.json())
+            .then(response => {
+                // TODO zawołać setHotels List
+                dispatch(actionCreator.setHotelList(response));
+            })
+            .catch(error =>{
+                // TODO zawołać setError List
+                console.log('error', error);
+                return error
+            });
     },[]);
 
     return (
-        <div>
+        <ListContainer>
             <p>Before</p>
             {
                 hotelList &&
-                <List>
-                    <ul>
-                        {hotelList.map((hotel: Hotel) => (
-                            <li key={`section-${hotel.id}`}>
-                                <ListItem key={`${hotel.name}`} hotel={hotel}/>
-                            </li>
-                        ))}
-                    </ul>
-                </List>
+                        <ul>
+                            {
+                                hotelList.map((hotel: Hotel) => (
+                                    <li key={`section-${hotel.id}`}>
+                                        <ListItem key={`${hotel.name}`} hotel={hotel}/>
+                                    </li>
+                                ))
+                            }
+                        </ul>
             }
-        </div>
+        </ListContainer>
     )
 };
+
+const ListContainer = styled.div`
+    width: 80%;
+    margin: 0 auto;
+    ul {
+        list-style: none;
+    }
+`

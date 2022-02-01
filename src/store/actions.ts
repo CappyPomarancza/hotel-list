@@ -14,5 +14,5 @@ export enum ActionTypes {
 
 export const actionCreator = {
     setHotelList: (payload: any) => createAction(ActionTypes.SetHotelList, payload),
-    getHotelList: () => createAction(ActionTypes.GetHotelList),
+    // getHotelList: () => createAction(ActionTypes.GetHotelList),
 };

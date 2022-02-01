@@ -17,25 +17,25 @@ const initialState: RootState = {
     isFetching: false
 };
 
-function fetchHotelList() {
-    return new Promise((resolve, reject) => {
-        let options = {
-            method: 'GET',
-        };
-        fetch('https://obmng.dbm.guestline.net/api/hotels?collection-id=OBMNG', options)
-            .then(response => response.json())
-            .then(response => {
-                // TODO zawołać setHotels List
-                return response
-            })
-            .catch(error =>{
-                reject(error);
-                // TODO zawołać setError List
-
-                return error
-            });
-    })
-}
+// function fetchHotelList() {
+//     return new Promise((resolve, reject) => {
+//         let options = {
+//             method: 'GET',
+//         };
+//         fetch('https://obmng.dbm.guestline.net/api/hotels?collection-id=OBMNG', options)
+//             .then(response => response.json())
+//             .then(response => {
+//                 // TODO zawołać setHotels List
+//                 return response
+//             })
+//             .catch(error =>{
+//                 reject(error);
+//                 // TODO zawołać setError List
+//
+//                 return error
+//             });
+//     })
+// }
 
 
 
